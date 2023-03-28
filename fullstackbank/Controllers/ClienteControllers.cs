@@ -11,7 +11,7 @@ namespace fullstackbank.Controllers
 
         private IClientesServices _clienteServices;
 
-        public ClientesController(IClientesServices clienteServices)
+        public void ClientesController(IClientesServices clienteServices)
         {
             _clienteServices = clienteServices;
         }
@@ -31,6 +31,26 @@ namespace fullstackbank.Controllers
             _clienteServices.Inserir(pessoaJuridica);
             return Created(Request.Path, pessoaJuridica);
         }
+        [HttpGet]
+        [Route("Clientes")]
+        public IActionResult ObterTodos()
+        {
+            var clientes = _clienteServices.ObterTodos();
+            return Ok(clientes);
+        }
+
+        [HttpGet("{id}")]
+        [Route("Clientes/{id}")]
+        public IActionResult ObterPorId(int id)
+        {
+            var cliente = _clienteServices.ObterPorId(id);
+            if (cliente == null)
+            {
+                return NotFound();
+            }
+            return Ok(cliente);
+        }
+
 
     }
 }
