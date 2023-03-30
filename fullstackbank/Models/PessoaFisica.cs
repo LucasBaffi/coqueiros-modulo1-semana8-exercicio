@@ -1,6 +1,6 @@
 namespace fullstackbank.Models
 {
-    public  class PessoaFisica : Cliente
+    public class PessoaFisica : Cliente
     {
         public string Nome { get; set; }
         public string CPF { get; set; }
@@ -10,6 +10,12 @@ namespace fullstackbank.Models
             get { return (int)(Math.Floor((DateTime.Now - DataNascimento).TotalDays / 365.25)); }
             private set { }
 
+        }
+        public PessoaFisica(string nome, string cpf, DateTime dataNascimento)
+        {
+            Nome = nome;
+            CPF = cpf;
+            DataNascimento = dataNascimento;
         }
 
         public override string ResumoCliente()
@@ -49,5 +55,5 @@ namespace fullstackbank.Models
         //     pessoa.NumeroConta = int.Parse(Console.ReadLine());
 
         //     return pessoa;
-        }
     }
+}

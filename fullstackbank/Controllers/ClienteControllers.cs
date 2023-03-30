@@ -51,6 +51,63 @@ namespace fullstackbank.Controllers
             return Ok(cliente);
         }
 
+        [HttpPut("{id}")]
+        [Route("Clientes/pessoaFisica/{id}")]
+        public IActionResult AtualizarPessoaFisica( [FromBody] PessoaFisica pessoaFisica, int id)
+
+        {
+            var clienteExistente = _clienteServices.ObterPorId(id);
+
+            if (clienteExistente == null)
+            {
+                return NotFound();
+            }
+
+            clienteExistente.Nome = pessoaFisica.Nome;
+            clienteExistente.Endereco = pessoaFisica.Endereco;
+            clienteExistente.Telefone = pessoaFisica.Telefone;
+            clienteExistente.Cpf = pessoaFisica.CPF;
+
+            _clienteServices.Atualizar(clienteExistente);
+
+            return Ok();
+        }
+        
+        [HttpPut("{id}")]
+        [Route("Clientes/pessoaJuridica/{id}")]
+        public IActionResult AtualizarPessoaJuridica(int id, [FromBody] PessoaJuridica pessoaJuridica)
+        {
+            var clienteExistente = _clienteServices.ObterPorId(id);
+            if (clienteExistente == null){
+                return NotFound();
+            }
+            clienteExistente.NomeFantasia = pessoaJuridica.NomeFantasia;
+            clienteExistente.Endereco = pessoaJuridica.Endereco;
+            clienteExistente.Telefone = pessoaJuridica.Telefone;
+            clienteExistente.CNPJ = pessoaJuridica.CNPJ;
+
+            _clienteServices.Atualizar(clienteExistente);
+
+            return Ok();
+        }
+
+        [HttpDelete("{id}")]
+        [Route("Clientes/{id}")]
+        public IActionResult Delete(int id)
+        {
+           var clienteExistente = _clienteServices.ObterPorId(id);
+
+            if (clienteExistente == null)
+        {
+            return NotFound(); // retorna 404 caso o cliente não exista
+        }
+            if (clienteExistente.Saldo != 0){
+                return BadRequest("Nao foi possivel Excluir o cliente");
+            }
+            _clienteServices.ExcluirCliente(clienteExistente);
+
+            return NoContent();
+        }
 
     }
 }

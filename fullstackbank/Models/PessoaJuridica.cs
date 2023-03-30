@@ -60,10 +60,10 @@ namespace fullstackbank.Models
 
             string resumo = $"{NumeroConta}  |  {RazaoSocial}  |  {NomeFantasia}  |  {CNPJ}";
 
-            foreach (var socio in Socios)
-            {
-                resumo += $" |{socio} ";
-            }
+            // foreach (var socio in Socios)
+            // {
+            //     resumo += $" |{socio} ";
+            // }
 
             return resumo;
 
