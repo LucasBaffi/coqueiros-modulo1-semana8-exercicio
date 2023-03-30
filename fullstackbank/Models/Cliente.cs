@@ -1,3 +1,9 @@
+using Microsoft.AspNetCore.Mvc;
+using fullstackbank.Models;
+using fullstackbank.Interfaces;
+using fullstackbank.Services;
+using fullstackbank.Controllers;
+
 namespace fullstackbank.Models
 {
     public abstract class Cliente
@@ -14,12 +20,7 @@ namespace fullstackbank.Models
 
         public abstract string ResumoCliente();
 
-        public List<Transacao> Extrato { get; set; }
-
-        public Cliente()
-        {
-            Extrato = new List<Transacao>();
-        }
+        public List<Transacao> Extrato { get; set; }      
 
         public Cliente(string email, string telefone, string endereco, int numeroConta, List<Transacao> extrato)
         {
